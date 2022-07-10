@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:students_table/controller/studentcontroolr.dart';
+import 'package:lottie/lottie.dart';
 import 'package:students_table/core/core.dart';
 import 'package:students_table/model/model.dart';
 import 'package:students_table/view/view.dart';
+import 'package:students_table/widgets/infotext.dart';
 
 class Searches extends SearchDelegate {
   final studentSearch = Hive.box<StudentModel>(boxName);
@@ -14,7 +14,7 @@ class Searches extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
       appBarTheme: const AppBarTheme(
-        backgroundColor:white1,
+        backgroundColor:green1,
         elevation: 0,
       ),
       // ignore: prefer_const_constructors
@@ -31,7 +31,7 @@ class Searches extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        color: green1,
+        color:white1,
         onPressed: () {
           if (query.isEmpty) {
             close(context, null);
@@ -56,7 +56,7 @@ class Searches extends SearchDelegate {
           },
           icon: const Icon(
             Icons.arrow_back,
-            color: green1,
+            color: white1,
           ),
         ),
       ],
@@ -65,7 +65,10 @@ class Searches extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Center(child: Text(query,style: TextStyle(color: green1),));
+    return Center(child:InfoText(title: query, size: 18, color:white1),
+    
+    
+    );
   }
 
   @override
@@ -80,10 +83,11 @@ class Searches extends SearchDelegate {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor:white1,
+        backgroundColor:Colors.transparent,
         body: stdList.isEmpty
-            ? const Center(
-                child: Text("no student found"),
+            ?  Center(
+                child:Lottie.network("https://assets6.lottiefiles.com/packages/lf20_mznpnepo.json"),
+                 
               )
             : ListView.builder(
                 itemCount: stdList.length,

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
@@ -53,6 +54,11 @@ Future picImage(ImageSource imageSource)async{
   update();
  
 }
+
+gotoHome(){
+  
+}
+
  
   
 }

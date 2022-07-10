@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:students_table/view/list_screen.dart';
 import 'package:students_table/model/model.dart';
+import 'package:students_table/view/splash.dart';
 
 
  Future<void> main()async {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         
       ),
-      home:ListScreen(),
+      home:Splash(),
     );
   }
 }

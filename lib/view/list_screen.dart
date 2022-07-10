@@ -2,16 +2,14 @@
 
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:students_table/controller/studentcontroolr.dart';
 import 'package:students_table/core/core.dart';
 import 'package:students_table/model/model.dart';
 import 'package:students_table/view/add_screen.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:students_table/view/search.dart';
 import 'package:students_table/view/view.dart';
 import 'package:students_table/widgets/iconbutton.dart';
@@ -20,8 +18,6 @@ import 'package:students_table/widgets/infotext.dart';
 class ListScreen extends StatelessWidget {
   ListScreen({Key? key, this.index}) : super(key: key);
   int? index;
-
-  // Box<StudentModel> students = Hive.box<StudentModel>(boxName);
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +34,7 @@ class ListScreen extends StatelessWidget {
               IconButtons(
                   icons: Icons.person_add_alt_rounded,
                   onpressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => AddScreen(),
-                      ),
-                    );
+                    Get.to(AddScreen());
                   },
                   colors: white1),
               const Spacer(),
@@ -81,8 +72,15 @@ class ListScreen extends StatelessWidget {
                 height: size.height - 180,
                 color: Colors.transparent,
                 child: Obx(
-                  () {
-                    return ListView.builder(
+                  ()=>
+                    studentController.allStudents.isEmpty
+                     ?  Center(
+                child:Lottie.network("https://assets10.lottiefiles.com/packages/lf20_hl5n0bwb.json"),
+                 
+              )
+            :
+                    
+                    ListView.builder(
                       itemCount: studentController.allStudents.length,
                       itemBuilder: (BuildContext context, int index) {
                         StudentModel student =
@@ -93,11 +91,13 @@ class ListScreen extends StatelessWidget {
                             Get.to(ViewScreen(index: index));
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(8.0),
                             child: Container(
                               alignment: Alignment.center,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(40),
+                                borderRadius:const BorderRadius.only(
+                                  topLeft: Radius.circular(47),
+                                ),
                                 child: BackdropFilter(
                                   filter:
                                       ImageFilter.blur(sigmaX: 15, sigmaY: 15),
@@ -108,10 +108,12 @@ class ListScreen extends StatelessWidget {
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomCenter,
                                           colors: [
-                                            Colors.white60,
-                                            Colors.white10
+                                            Color.fromARGB(153, 223, 137, 137),
+                                            Color.fromARGB(26, 219, 208, 208)
                                           ]),
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius:const BorderRadius.only(
+                                        topLeft: Radius.circular(47),
+                                      ),
                                       border: Border.all(
                                         width: 2,
                                         color: Colors.white30,
@@ -120,8 +122,7 @@ class ListScreen extends StatelessWidget {
                                     child: ListTile(
                                       leading: student.image == null
                                           ? const CircleAvatar(
-                                              backgroundColor:
-                                                  Colors.transparent,
+                                              backgroundColor: Colors.transparent,
                                               radius: 40,
                                               backgroundImage:
                                                   AssetImage("asset/logo2.png"),
@@ -137,12 +138,12 @@ class ListScreen extends StatelessWidget {
                                       title: InfoText(
                                         title: student.names,
                                         size: 20,
-                                        color: green1,
+                                        color: white1,
                                       ),
                                       subtitle: InfoText(
                                         title: student.domin,
-                                        size: 18,
-                                        color: green1,
+                                        size: 16,
+                                        color:white1,
                                       ),
                                       trailing: IconButton(
                                         onPressed: () {
@@ -151,7 +152,7 @@ class ListScreen extends StatelessWidget {
                                         },
                                         icon: const Icon(
                                           Icons.more_vert,
-                                          color: green1,
+                                          color: white1,
                                         ),
                                       ),
                                     ),
@@ -162,8 +163,8 @@ class ListScreen extends StatelessWidget {
                           ),
                         );
                       },
-                    );
-                  },
+                    ),
+                  
                 ),
               ),
             ),
@@ -222,6 +223,11 @@ class ListScreen extends StatelessWidget {
                                 onPressed: () {
                                   studentController.deletestudents(index);
                                   Navigator.pop(context);
+                                  Get.snackbar("Delete", "Sussesfully",
+                                      icon: const Icon(Icons.thumb_up),
+                                      backgroundColor: Colors.black,
+                                      colorText: white1,
+                                      snackPosition: SnackPosition.BOTTOM);
                                 },
                                 child: const Text(
                                   'Delete',

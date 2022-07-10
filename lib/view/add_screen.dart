@@ -3,13 +3,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:students_table/controller/studentcontroolr.dart';
 import 'package:students_table/core/core.dart';
 import 'package:students_table/model/model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:students_table/widgets/iconbutton.dart';
-import 'package:students_table/widgets/showdialof.dart';
 import 'package:students_table/widgets/textform.dart';
 
 class AddScreen extends StatelessWidget {
@@ -28,7 +26,6 @@ class AddScreen extends StatelessWidget {
 
   XFile? xFile;
 
-  
   final formkey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
@@ -93,7 +90,7 @@ class AddScreen extends StatelessWidget {
                                 _emailController.dispose();
                                 _mobileController.dispose();
                                 _domainController.dispose();
-                                studentController.imagePath= null ;
+                                studentController.imagePath = null;
                               },
                               initState: (state) {
                                 if (isEditing) {
@@ -103,7 +100,7 @@ class AddScreen extends StatelessWidget {
                                   _emailController.text = student!.email;
                                   _placeController.text = student!.place;
                                   _mobileController.text = student!.number;
-                                  studentController.imagePath= student!.image;
+                                  studentController.imagePath = student!.image;
                                 }
                               },
                               builder: (controller) {
@@ -119,8 +116,7 @@ class AddScreen extends StatelessWidget {
                                         ),
                                         Spacer(),
                                         SizedBox(
-                                          width: 175,
-                                          child: dominFeild()),
+                                            width: 175, child: dominFeild()),
                                       ],
                                     ),
                                     height10,
@@ -186,7 +182,8 @@ class AddScreen extends StatelessWidget {
                                           onPressed: () {
                                             if (formkey.currentState!
                                                 .validate()) {
-                                              Navigator.pop(context);
+                                              Get.back();
+
                                               StudentModel newStudent =
                                                   StudentModel(
                                                       age: _ageController.text,
@@ -203,13 +200,29 @@ class AddScreen extends StatelessWidget {
                                                       image: studentController
                                                           .imagePath);
                                               if (isEditing) {
-                                              studentController.updateStudent(
+                                                studentController.updateStudent(
                                                     index!, newStudent);
+
+                                                      Get.snackbar("Student",
+                                                    "Details Updated",
+                                                    icon: const Icon(
+                                                        Icons.thumb_up),
+                                                    snackPosition:
+                                                        SnackPosition.BOTTOM);
                                               } else {
-                                                studentController.addStudent(newStudent);
+                                                studentController
+                                                    .addStudent(newStudent);
+                                                      Get.snackbar("Student",
+                                                    "Details Added",
+                                                    icon: const Icon(
+                                                        Icons.thumb_up),
+                                                    snackPosition:
+                                                        SnackPosition.BOTTOM);
+                                              
                                                 // Student.add(newStudent);
                                               }
                                               studentController.getStudents();
+
                                             }
                                           },
                                           icon: Icon(
