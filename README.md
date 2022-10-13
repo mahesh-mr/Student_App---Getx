@@ -29,6 +29,9 @@ GetX has a huge ecosystem, a large community, a large number of collaborators, a
 
 This project is a starting point for a Flutter application.
 
+
+
+
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
@@ -37,3 +40,10 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+![s1](https://user-images.githubusercontent.com/102028446/195491418-600a0179-bc91-42fb-958e-a234353a8926.jpeg)
+![s2](https://user-images.githubusercontent.com/102028446/195491450-f0cd5562-58c9-4e04-a93a-dadfe1e2011b.jpeg)
+![s3](https://user-images.githubusercontent.com/102028446/195491475-a6d3d6af-360e-4782-b844-568117dc6921.jpeg)
+![s4](https://user-images.githubusercontent.com/102028446/195491533-5899a9ef-ac3b-4f4e-ba5d-62b4f461ac79.jpeg)
+![Uploading s5.jpeg…]()
+
